@@ -14,7 +14,6 @@
             background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             text-align: center;
             color: white;
-            animation: fadeIn 1.5s ease-in-out;
         }
 
         /* Header */
@@ -24,23 +23,15 @@
             align-items: center;
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: white;
-            padding: 18px;
-            font-size: 32px;
+            padding: 15px 20px;
+            font-size: 30px;
             font-weight: bold;
             position: relative;
-            z-index: 10;
         }
 
-        .header {
-            margin-left: 20px;
-        }
-
-        /* Notification Bell */
         .notification-container {
             position: relative;
-            margin-right: 20px;
             cursor: pointer;
-            z-index: 20;
         }
 
         .notification-icon {
@@ -58,26 +49,15 @@
             position: absolute;
             right: 0;
             top: 35px;
-            width: 200px;
+            width: 220px;
             background: white;
             color: black;
             border-radius: 5px;
             padding: 10px;
             font-size: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.3s ease-in-out;
             text-align: left;
             z-index: 100;
-        }
-
-        .notification-box p {
-            margin: 5px 0;
-            padding: 5px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .notification-box p:last-child {
-            border-bottom: none;
         }
 
         /* Countdown Timer */
@@ -93,29 +73,23 @@
             flex-direction: column;
             align-items: center;
             margin: 20px 0 40px;
-            position: relative;
-            z-index: 1;
         }
 
         .countdown-row {
             display: flex;
-            gap: 20px;
-        }
-
-        .countdown-space {
-            height: 10px;
+            gap: 15px;
+            margin-bottom: 10px;
         }
 
         .countdown-box {
             background: #0072ff;
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            width: 100px;
-            font-size: 18px;
+            width: 80px;
+            font-size: 16px;
             font-weight: bold;
             text-align: center;
-            animation: pulse 1s infinite alternate;
         }
 
         /* Study Boxes */
@@ -129,13 +103,12 @@
 
         .study-box {
             background: #87CEFA;
-            padding: 20px;
+            padding: 15px;
             width: 290px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease-in-out;
-            animation: bounce 1.5s infinite alternate;
         }
 
         .study-box:hover {
@@ -165,33 +138,12 @@
             background: #0056b3;
         }
 
-
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        @keyframes bounce {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-5px); }
-        }
-
         @keyframes shake {
             0%, 100% { transform: rotate(0); }
             25% { transform: rotate(-10deg); }
             50% { transform: rotate(10deg); }
             75% { transform: rotate(-5deg); }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
     </style>
@@ -220,7 +172,6 @@
         <div class="countdown-box" id="days">00 <br>Days</div>
         <div class="countdown-box" id="hours">00 <br>Hours</div>
     </div>
-    <div class="countdown-space"></div>
     <div class="countdown-row">
         <div class="countdown-box" id="minutes">00 <br>Minutes</div>
         <div class="countdown-box" id="seconds">00 <br>Seconds</div>
@@ -231,21 +182,15 @@
 <div class="study-container">
     <div class="study-box">
         <img src="https://i.postimg.cc/X7vPSrgk/667423824369-IMG-9619.png">
-          <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/abhay10th'">LET'S STUDY</button>
+        <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/abhay10th'">LET'S STUDY</button>
     </div>
-</div>
-    
-    <div class="study-container">
     <div class="study-box">
         <img src="https://i.postimg.cc/g05MWsNV/78589124373-67499f10f203a-abhay-9th-new-1.png">
-        <button class="study-button">LET'S STUDY</button>
+        <button class="study-button" onclick="window.location.href='https://example.com/abhay9th'">LET'S STUDY</button>
     </div>
-</div>
-    
-    <div class="study-container">
     <div class="study-box">
         <img src="https://i.postimg.cc/vTvJH2YN/hq720.jpg">
-        <button class="study-button">LET'S STUDY</button>
+        <button class="study-button" onclick="window.location.href='https://example.com/science'">LET'S STUDY</button>
     </div>
 </div>
 
@@ -271,13 +216,7 @@
         var bell = document.getElementById("bell");
         bell.classList.add("shake");
         setTimeout(() => bell.classList.remove("shake"), 500);
-        box.style.display = (box.style.display === "block") ? "none" : "block";
-    }
-
-        // Function to play voice message when the page loads
-    function playWelcomeVoice() {
-        const msg = new SpeechSynthesisUtterance("EduSparK. Siksha me kranti");
-        window.speechSynthesis.speak(msg);
+        box.style.display = box.style.display === "block" ? "none" : "block";
     }
 
     updateCountdown();
