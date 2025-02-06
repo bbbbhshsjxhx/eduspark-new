@@ -60,38 +60,7 @@
             z-index: 100;
         }
 
-        /* Countdown Timer */
-        .countdown-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #00c6ff;
-            margin-top: 30px;
-        }
-
-        .countdown-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px 0 40px;
-        }
-
-        .countdown-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .countdown-box {
-            background: #0072ff;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            width: 80px;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-        }
-
+        
         /* Study Boxes */
         .study-container {
             display: flex;
@@ -104,7 +73,7 @@
         .study-box {
             background: #87CEFA;
             padding: 15px;
-            width: 290px;
+            width: 300px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -165,19 +134,6 @@
     </div>
 </div>
 
-<!-- Countdown Timer -->
-<div class="countdown-title">COUNTDOWN FOR 10TH BOARD'S</div>
-<div class="countdown-container">
-    <div class="countdown-row">
-        <div class="countdown-box" id="days">00 <br>Days</div>
-        <div class="countdown-box" id="hours">00 <br>Hours</div>
-    </div>
-    <div class="countdown-row">
-        <div class="countdown-box" id="minutes">00 <br>Minutes</div>
-        <div class="countdown-box" id="seconds">00 <br>Seconds</div>
-    </div>
-</div>
-
 <!-- Study Boxes -->
 <div class="study-container">
     <div class="study-box">
@@ -195,22 +151,7 @@
 </div>
 
 <script>
-    function updateCountdown() {
-        const targetDate = new Date("February 15, 2025 00:00:00").getTime();
-
-        setInterval(() => {
-            let now = new Date().getTime();
-            let difference = targetDate - now;
-
-            if (difference > 0) {
-                document.getElementById("days").innerHTML = Math.floor(difference / (1000 * 60 * 60 * 24)) + "<br>Days";
-                document.getElementById("hours").innerHTML = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + "<br>Hours";
-                document.getElementById("minutes").innerHTML = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)) + "<br>Minutes";
-                document.getElementById("seconds").innerHTML = Math.floor((difference % (1000 * 60)) / 1000) + "<br>Seconds";
-            }
-        }, 1000);
-    }
-
+    
     function toggleNotifications() {
         var box = document.getElementById("notificationBox");
         var bell = document.getElementById("bell");
