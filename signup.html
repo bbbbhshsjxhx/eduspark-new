@@ -3,102 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSparK - Sign Up</title>
+    <title>Sign Up | EduSparK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c4966);
-            background-size: 400% 400%;
-            animation: gradientMove 8s infinite ease-in-out;
-            text-align: center;
-            color: white;
-            margin: 0;
-            height: 100vh;
+            background: linear-gradient(-45deg, #141e30, #243b55, #141e30);
+            background-size: 300% 300%;
+            animation: bgAnimation 8s infinite ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            height: 100vh;
+            color: white;
         }
 
         .signup-container {
-            background: rgba(255, 255, 255, 0.9);
-            color: black;
-            padding: 20px;
-            width: 90%;
-            max-width: 350px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: fadeInSlide 1s forwards ease-in-out;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 24px;
         }
 
-        input, button {
+        .input-group {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .input-group input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
+            padding: 12px;
             border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
             transition: all 0.3s ease-in-out;
         }
 
-        button {
-            background: #007BFF;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
+        .input-group input:focus {
+            box-shadow: 0px 0px 8px rgba(0, 162, 255, 0.8);
+            transform: scale(1.02);
         }
 
-        button:hover {
-            background: #0056b3;
+        .signup-button {
+            background: #00a2ff;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .signup-button:hover {
+            background: #0080cc;
             transform: scale(1.05);
         }
 
-        a {
-            color: #007BFF;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
         }
 
-        a:hover {
-            color: #0056b3;
+        .login-link a {
+            color: #00a2ff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .login-link a:hover {
+            color: #0080cc;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
 <body>
 
 <div class="signup-container">
-    <h2>Sign Up for EduSparK</h2>
-    <input type="text" id="new_username" placeholder="Choose a Username">
-    <input type="password" id="new_password" placeholder="Choose a Password">
-    <button onclick="signup()">Sign Up</button>
-    <p><a href="login.html">Already have an account? Login</a></p>
+    <h2>Create an Account</h2>
+    <form id="signupForm">
+        <div class="input-group">
+            <input type="text" id="name" placeholder="Full Name" required>
+        </div>
+        <div class="input-group">
+            <input type="email" id="email" placeholder="Email Address" required>
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="signup-button">Sign Up</button>
+    </form>
+    <div class="login-link">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
 </div>
 
 <script>
-    function signup() {
-        let username = document.getElementById("new_username").value;
-        let password = document.getElementById("new_password").value;
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // Store signup data (this should be replaced with actual database logic)
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
 
-        if (username && password) {
-            alert("Signup successful! Please log in.");
-            window.location.href = "login.html";
-        } else {
-            alert("Please fill in all fields.");
-        }
-    }
+        localStorage.setItem("user_name", name);
+        localStorage.setItem("user_email", email);
+        localStorage.setItem("user_password", password);
+
+        alert("Signup Successful! Redirecting to login...");
+        window.location.href = "signup_success.html"; // Redirect to signup success page
+    });
 </script>
 
 </body>
