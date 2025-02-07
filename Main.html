@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSparK - Next Page</title>
+    <title>EduSparK - Books</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             color: white;
-            animation: fadeIn 1.2s ease-in-out;
-            padding: 10px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         /* Header */
@@ -29,89 +24,76 @@
             align-items: center;
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: white;
-            padding: 15px 25px;
-            font-size: 50px;
+            padding: 18px;
+            font-size: 28px;
             font-weight: bold;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header {
+            margin-left: 20px;
         }
 
         /* Back Button */
         .back-container {
+            margin-right: 20px;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
-            display: flex;
-            align-items: center;
-            font-size: 22px;
+            font-size: 24px;
+            transition: transform 0.3s ease;
         }
 
         .back-container:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            transform: scale(1.2);
         }
 
-        .back-icon {
-            font-size: 28px;
-            margin-right: 8px;
-        }
-
-        /* Study Section */
-        .content-container {
-            margin-top: 30px;
-            padding: 10px;
-        }
-
-        .content-container h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .study-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        /* Book Grid */
+        .book-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
+            padding: 100px 20px 20px;
         }
 
-        .study-box {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 20px;
-            width: 300px;
-            border-radius: 15px;
+        .book-box {
+            background: #87CEFA;
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease-in-out;
-            animation: bounce 1.5s infinite alternate;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .study-box:hover {
+        .book-box:hover {
             transform: scale(1.05);
         }
 
-        .study-box img {
+        .book-box img {
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
-        .study-button {
-            background: linear-gradient(135deg, #007BFF, #0056b3);
+        .download-button {
+            background: #007BFF;
             color: white;
-            padding: 12px;
+            padding: 10px;
             border: none;
             width: 100%;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 10px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s ease-in-out, transform 0.2s;
+            transition: background 0.3s ease;
         }
 
-        .study-button:hover {
-            background: linear-gradient(135deg, #0056b3, #003c80);
-            transform: translateY(-3px);
+        .download-button:hover {
+            background: #0056b3;
         }
 
         /* Animations */
@@ -120,43 +102,25 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes bounce {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-8px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
-                font-size: 20px;
-                padding: 12px 15px;
-            }
-
-            .back-container {
-                font-size: 18px;
-            }
-
-            .back-icon {
-                font-size: 24px;
-            }
-
-            .study-box {
-                width: 90%;
-            }
-
-            .study-button {
-                font-size: 14px;
-                padding: 10px;
+            .book-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
     </style>
 </head>
-<body>
+
 
 <!-- Header -->
 <div class="header-container">
-    <div class="header">EduSparK</div>
-
+    <div class="header">EduSparK - Books</div>
+    
     <!-- Back Button (New Icon & Animation) -->
     <div class="back-container" onclick="window.location.href='https://eduspark-premium.netlify.app/'">
         <span class="back-icon">🔙</span> Back
