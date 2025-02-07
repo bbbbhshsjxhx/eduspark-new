@@ -18,36 +18,41 @@
         }
 
         .header-container {
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: white;
-            padding: 18px;
+            padding: 15px 20px;
             font-size: 24px;
             font-weight: bold;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .header {
-            margin-left: 20px;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            flex-grow: 1;
         }
 
-        /* Back Button */
-        .back-container {
+        /* Back Button Styling */
+        .back-button {
+            font-size: 24px;
+            color: white;
+            background: none;
+            border: none;
             cursor: pointer;
-            margin-right: 20px;
-            font-size: 20px;
-            transition: transform 0.3s ease;
+            padding: 10px;
+            transition: color 0.3s ease;
         }
 
-        .back-container:hover {
-            transform: scale(1.2);
+        .back-button:hover {
+            color: #ff6347;
         }
-
         /* Main Content */
         .content-container {
             margin-top: 80px;
