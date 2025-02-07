@@ -128,17 +128,5 @@
     </div>
 </div>
 
-<script>
-    // Redirect to login page if user is not logged in
-    function checkAuth() {
-        let user = document.cookie.includes("loggedIn=true");
-        if (!user) {
-            window.location.href = "login.html";
-        }
-    }
-
-    checkAuth();
-</script>
-
 </body>
 </html>
