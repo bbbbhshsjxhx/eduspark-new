@@ -149,7 +149,6 @@
     document.getElementById("loginForm").addEventListener("submit", function(event) {
         event.preventDefault();
         
-        // Simulated login check using local storage
         let email = document.getElementById("email").value;
         let password = document.getElementById("password").value;
 
@@ -157,21 +156,22 @@
         let storedPassword = localStorage.getItem("user_password");
 
         if (email === storedEmail && password === storedPassword) {
-            // Show success popup
-            document.getElementById("loginPopup").style.display = "block";
-
             // Set login cookie for 10 days
             document.cookie = "loggedIn=true; max-age=" + 10 * 24 * 60 * 60 + "; path=/";
 
+            // Show success popup
+            document.getElementById("loginPopup").style.display = "block";
+
             // Redirect after 2 seconds
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "dashboard.html"; // Redirect to dashboard instead of index
             }, 2000);
         } else {
             alert("❌ Incorrect Email or Password!");
         }
     });
 </script>
+
 
 </body>
 </html>
