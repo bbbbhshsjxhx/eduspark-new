@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSparK - Sign Up</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c4966);
+            background-size: 400% 400%;
+            animation: gradientMove 8s infinite ease-in-out;
+            text-align: center;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .signup-container {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 20px;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeInSlide 1s forwards ease-in-out;
+        }
+
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button {
+            background: #007BFF;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>Sign Up for EduSparK</h2>
+    <input type="text" id="new_username" placeholder="Choose a Username">
+    <input type="password" id="new_password" placeholder="Choose a Password">
+    <button onclick="signup()">Sign Up</button>
+    <p><a href="login.html">Already have an account? Login</a></p>
+</div>
+
+<script>
+    function signup() {
+        let username = document.getElementById("new_username").value;
+        let password = document.getElementById("new_password").value;
+
+        if (username && password) {
+            alert("Signup successful! Please log in.");
+            window.location.href = "login.html";
+        } else {
+            alert("Please fill in all fields.");
+        }
+    }
+</script>
+
+</body>
+</html>
