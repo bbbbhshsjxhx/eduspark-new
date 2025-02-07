@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Wallah Batches - EduSparK</title>
+    <title>Next Page - EduSparK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -11,13 +11,14 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #141e30, #243b55);
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             text-align: center;
             color: white;
             animation: fadeIn 1.5s ease-in-out;
+            box-sizing: border-box;
         }
 
-        .header-container {
+        /* Header */
         .header-container {
             display: flex;
             justify-content: space-between;
@@ -53,45 +54,61 @@
         .back-button:hover {
             color: #ff6347;
         }
-        /* Main Content */
-        .content-container {
-            margin-top: 80px;
-            padding: 20px;
+
+        /* Study Boxes Section */
+        .study-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 0 20px;
         }
 
         .study-box {
             background: #87CEFA;
-            padding: 20px;
-            width: 290px;
+            padding: 25px;
+            width: 300px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
-            animation: bounce 1.5s infinite alternate;
-            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 30px;
+        }
+
+        .study-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
         }
 
         .study-box img {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .study-box:hover img {
+            transform: scale(1.05);
         }
 
         .study-button {
             background: #007BFF;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             width: 100%;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 10px;
-            border-radius: 5px;
+            margin-top: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .study-button:hover {
             background: #0056b3;
+            transform: translateY(-5px);
         }
 
         /* Animations */
@@ -100,35 +117,74 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes bounce {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-5px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Mobile and Tablet Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 12px 15px;
+            }
+
+            .back-button {
+                font-size: 20px;
+                padding: 5px;
+            }
+
+            .study-container {
+                padding: 0;
+                gap: 20px;
+            }
+
+            .study-box {
+                width: 90%;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .study-button {
+                font-size: 14px;
+            }
+        }
+
+        /* Mobile Layout for Very Small Screens */
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 10px;
+            }
+
+            .study-box {
+                width: 100%;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .study-button {
+                font-size: 12px;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- Header with Back Button -->
 <div class="header-container">
-    <div class="header">EduSparK - PW</div>
-
-    <!-- Back Button -->
-    <div class="back-container" onclick="window.location.href='index.html'">
-        🔙
-    </div>
+    <div class="header">EduSparK</div>
+    <button class="back-button" onclick="window.history.back()">⬅️</button>
 </div>
 
-<!-- Content Section -->
-<div class="content-container">
-    <h2>Physics Wallah Batches</h2>
-
-    <div class="study-box">
-        <img src="https://i.postimg.cc/zXr89Nbz/IMG-20250207-WA0002.jpg">
-        <button class="study-button" onclick="window.location.href='https://pw.live/batch1'">Join Batch</button>
-    </div>
-
+<!-- Study Boxes Section -->
     
-</div>
+    <h1>NEXT TOPPER</h1>
+    
+<div class="study-container">
+    <div class="study-box">
+        <img src="https://i.postimg.cc/zXr89Nbz/IMG-20250207-WA0002.jpg" alt="Study Box Image">
+        <button class="study-button">LET'S STUDY</button>
+    </div>
 
 </body>
 </html>
