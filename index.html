@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduSparK - Study Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-        body {
-            font-family: 'Poppins', sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
             background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            text-align: center;
             color: white;
+            text-align: center;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -22,11 +26,16 @@
             justify-content: space-between;
             align-items: center;
             background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: white;
+            backdrop-filter: blur(10px);
             padding: 15px 20px;
             font-size: 30px;
             font-weight: bold;
-            position: relative;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
 
         .notification-container {
@@ -36,52 +45,78 @@
 
         .notification-icon {
             font-size: 24px;
-            transition: transform 0.3s ease;
             display: inline-block;
+            transition: transform 0.3s ease;
         }
 
-        .shake {
-            animation: shake 0.5s ease-in-out;
+        .notification-icon:hover {
+            transform: scale(1.2);
         }
 
         .notification-box {
             display: none;
             position: absolute;
-            right: 0;
-            top: 35px;
-            width: 220px;
-            background: white;
+            left: 0;
+            top: 40px;
+            width: 250px;
+            background: rgba(255, 255, 255, 0.9);
             color: black;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-align: left;
             z-index: 100;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        
-        /* Study Boxes */
+        /* Background Animation */
+        .background-anim {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: bubbleMove linear infinite;
+        }
+
+        @keyframes bubbleMove {
+            from { transform: translateY(100vh); }
+            to { transform: translateY(-10vh); }
+        }
+
+        /* Study Box Container */
         .study-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            margin: 30px 0;
+            margin: 100px 0 30px;
+            padding: 20px;
         }
 
         .study-box {
-            background: #87CEFA;
-            padding: 15px;
-            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 20px;
+            width: 320px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .study-box:hover {
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
 
         .study-box img {
@@ -90,39 +125,51 @@
         }
 
         .study-button {
-            background: #007BFF;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             width: 100%;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 10px;
-            border-radius: 5px;
+            margin-top: 15px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
 
         .study-button:hover {
-            background: #0056b3;
+            background: linear-gradient(135deg, #fda085, #f6d365);
+            transform: scale(1.05);
         }
 
-        /* Animations */
-        @keyframes shake {
-            0%, 100% { transform: rotate(0); }
-            25% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
-            75% { transform: rotate(-5deg); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .header-container {
+                font-size: 24px;
+                padding: 10px;
+            }
+            .notification-box {
+                left: auto;
+                right: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
-<!-- Header with Notification Bell -->
+<!-- Animated Background -->
+<div class="background-anim"></div>
+
+<!-- Header -->
 <div class="header-container">
     <div class="header">EduSparK</div>
-    
+
     <!-- Notification Bell -->
     <div class="notification-container" onclick="toggleNotifications()">
         <span class="notification-icon" id="bell">🔔</span>
@@ -135,41 +182,42 @@
 </div>
 
 <!-- Study Boxes -->
-    <div class="study-container">
+<div class="study-container">
     <div class="study-box">
         <img src="https://i.postimg.cc/Dz0b8k6V/IMG-20250206-WA0035.jpg">
         <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/books'">GET BOOKS</button>
     </div>
 
-  <div class="study-container">
-  <div class="study-box">
+    <div class="study-box">
         <img src="https://i.postimg.cc/L8xYQgqK/Picsart-25-02-06-20-16-59-227.png">
         <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/Main'">LET'S STUDY</button>
     </div>
-          
-      <div class="study-container">
-      <div class="study-box">
+
+    <div class="study-box">
         <img src="https://i.postimg.cc/dQf5pDyC/Picsart-25-02-06-20-18-17-749.png">
         <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/pxw'">LET'S STUDY</button>
     </div>
-   
-    <div class="study-container">
+
     <div class="study-box">
         <img src="https://i.postimg.cc/bJyH6tYb/IMG-20250206-WA0030.jpg">
         <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/vidyakul'">LET'S STUDY</button>
     </div>
-       
+</div>
+
 <script>
-    
     function toggleNotifications() {
         var box = document.getElementById("notificationBox");
-        var bell = document.getElementById("bell");
-        bell.classList.add("shake");
-        setTimeout(() => bell.classList.remove("shake"), 500);
         box.style.display = box.style.display === "block" ? "none" : "block";
     }
 
-    updateCountdown();
+    // Background Animation
+    for (let i = 0; i < 50; i++) {
+        let bubble = document.createElement("div");
+        bubble.classList.add("bubble");
+        bubble.style.left = Math.random() * 100 + "vw";
+        bubble.style.animationDuration = Math.random() * 5 + 5 + "s";
+        document.querySelector(".background-anim").appendChild(bubble);
+    }
 </script>
 
 </body>
