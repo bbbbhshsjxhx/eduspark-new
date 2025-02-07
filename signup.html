@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | EduSparK</title>
+    <title>Sign Up</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
+        /* Basic reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,137 +13,118 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #141e30, #243b55, #141e30);
-            background-size: 300% 300%;
-            animation: bgAnimation 8s infinite ease-in-out;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            color: white;
+            margin: 0;
+            background: linear-gradient(45deg, #6a11cb, #2575fc); /* Animated gradient */
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
         }
 
         .signup-container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 25px;
-            border-radius: 12px;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             width: 350px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: #fff;
             text-align: center;
-            animation: fadeIn 1s ease-in-out;
+            animation: slideUp 0.5s ease-out;
         }
 
-        h2 {
-            margin-bottom: 15px;
-            font-size: 24px;
+        .signup-container h2 {
+            margin-bottom: 20px;
         }
 
-        .input-group {
-            margin: 15px 0;
-            position: relative;
-        }
-
-        .input-group input {
+        .signup-container input {
             width: 100%;
             padding: 12px;
-            border: none;
-            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
             font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .signup-container input:focus {
             outline: none;
-            transition: all 0.3s ease-in-out;
+            border-color: #4CAF50;
+            background-color: #444;
         }
 
-        .input-group input:focus {
-            box-shadow: 0px 0px 8px rgba(0, 162, 255, 0.8);
-            transform: scale(1.02);
-        }
-
-        .signup-button {
-            background: #00a2ff;
-            color: white;
-            padding: 12px;
+        .signup-container button {
             width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
-        .signup-button:hover {
-            background: #0080cc;
+        /* Button Hover Animation */
+        .signup-container button:hover {
+            background-color: #45a049;
             transform: scale(1.05);
         }
 
-        .login-link {
-            margin-top: 10px;
+        /* Error message */
+        .error-message {
+            color: #ff4d4d;
             font-size: 14px;
+            margin-top: 10px;
         }
 
-        .login-link a {
-            color: #00a2ff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
+        .error-message p {
+            margin: 0;
         }
 
-        .login-link a:hover {
-            color: #0080cc;
-            text-decoration: underline;
+        /* Keyframe Animations */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bgAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="signup-container">
-    <h2>Create an Account</h2>
-    <form id="signupForm">
-        <div class="input-group">
-            <input type="text" id="name" placeholder="Full Name" required>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form method="POST" action="signup-handler.php">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="error-message">
+            <?php if (isset($_GET['error'])): ?>
+                <p><?php echo $_GET['error']; ?></p>
+            <?php endif; ?>
         </div>
-        <div class="input-group">
-            <input type="email" id="email" placeholder="Email Address" required>
-        </div>
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Password" required>
-        </div>
-        <button type="submit" class="signup-button">Sign Up</button>
-    </form>
-    <div class="login-link">
-        Already have an account? <a href="login.html">Login</a>
     </div>
-</div>
-
-<script>
-    document.getElementById("signupForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        // Store signup data (this should be replaced with actual database logic)
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
-
-        localStorage.setItem("user_name", name);
-        localStorage.setItem("user_email", email);
-        localStorage.setItem("user_password", password);
-
-        alert("Signup Successful! Redirecting to login...");
-        window.location.href = "signup_success.html"; // Redirect to signup success page
-    });
-</script>
-
 </body>
 </html>
