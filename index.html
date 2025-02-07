@@ -159,6 +159,24 @@
         <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/vidyakul'">LET'S STUDY</button>
     </div>
 
+ <script>
+    function getCookie(name) {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.startsWith(name + "=")) {
+                return cookie.split('=')[1];
+            }
+        }
+        return null;
+    }
+
+    if (!getCookie("user_logged_in")) {
+        window.location.href = "login.html";
+    }
+            </script>
+        
+
 <script>
     
     function toggleNotifications() {
