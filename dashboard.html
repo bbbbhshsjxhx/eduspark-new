@@ -204,6 +204,29 @@
     }
 </script>
 
+    <script>
+    // Function to check login status
+    function checkLogin() {
+        let cookies = document.cookie.split('; ');
+        let loggedIn = false;
+
+        for (let i = 0; i < cookies.length; i++) {
+            let cookiePair = cookies[i].split('=');
+            if (cookiePair[0] === "loggedIn" && cookiePair[1] === "true") {
+                loggedIn = true;
+                break;
+            }
+        }
+
+        // If not logged in, redirect to login page
+        if (!loggedIn) {
+            window.location.href = "login.html";
+        }
+    }
+
+    // Run login check on page load
+    checkLogin();
+</script>
 
 </body>
 </html>
