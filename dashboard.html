@@ -205,28 +205,28 @@
 </script>
 
     <script>
-    // Function to check login status
     function checkLogin() {
-        let cookies = document.cookie.split('; ');
-        let loggedIn = false;
+        let cookies = document.cookie.split("; ");
+        let isLoggedIn = false;
 
         for (let i = 0; i < cookies.length; i++) {
-            let cookiePair = cookies[i].split('=');
+            let cookiePair = cookies[i].split("=");
             if (cookiePair[0] === "loggedIn" && cookiePair[1] === "true") {
-                loggedIn = true;
+                isLoggedIn = true;
                 break;
             }
         }
 
-        // If not logged in, redirect to login page
-        if (!loggedIn) {
+        // If not logged in, redirect to login.html
+        if (!isLoggedIn) {
             window.location.href = "login.html";
         }
     }
 
-    // Run login check on page load
+    // Run this function when the page loads
     checkLogin();
 </script>
+
 
 </body>
 </html>
