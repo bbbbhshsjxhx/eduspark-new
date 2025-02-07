@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSparK - Books</title>
+    <title>Next Page - EduSparK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -12,9 +12,10 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: white;
             text-align: center;
+            color: white;
             animation: fadeIn 1.5s ease-in-out;
+            box-sizing: border-box;
         }
 
         /* Header */
@@ -54,51 +55,60 @@
             color: #ff6347;
         }
 
-        /* Book Grid */
-        .book-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 100px 20px 20px;
+        /* Study Boxes Section */
+        .study-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 0 20px;
         }
 
-        .book-box {
+        .study-box {
             background: #87CEFA;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 25px;
+            width: 300px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
             animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 30px;
         }
 
-        .book-box:hover {
+        .study-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .study-box img {
+            width: 100%;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .study-box:hover img {
             transform: scale(1.05);
         }
 
-        .book-box img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .download-button {
+        .study-button {
             background: #007BFF;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             width: 100%;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 10px;
-            border-radius: 5px;
+            margin-top: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
-        .download-button:hover {
+        .study-button:hover {
             background: #0056b3;
+            transform: translateY(-5px);
         }
 
         /* Animations */
@@ -108,69 +118,90 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
+        /* Mobile and Tablet Responsive Design */
         @media (max-width: 768px) {
-            .book-container {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            .header-container {
+                padding: 12px 15px;
+            }
+
+            .back-button {
+                font-size: 20px;
+                padding: 5px;
+            }
+
+            .study-container {
+                padding: 0;
+                gap: 20px;
+            }
+
+            .study-box {
+                width: 90%;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .study-button {
+                font-size: 14px;
             }
         }
+
+        /* Mobile Layout for Very Small Screens */
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 10px;
+            }
+
+            .study-box {
+                width: 100%;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .study-button {
+                font-size: 12px;
+            }
+        }
+
     </style>
 </head>
-<body onload="checkLogin()">
+<body>
 
-<!-- Header -->
+<!-- Header with Back Button -->
 <div class="header-container">
     <div class="header">EduSparK</div>
-    <div class="back-container" onclick="window.location.href='index.html'">⬅️</div>
+    <button class="back-button" onclick="window.history.back()">⬅️</button>
 </div>
 
-<!-- Book Section -->
-<h2>EDUSPARK KHAJANA</h2>
+<!-- Study Boxes Section -->
     
-<div class="book-container">
-    <!-- Repeat this book-box for 30 books -->
-    <div class="book-box">
-        <img src="https://via.placeholder.com/150x200.png?text=Book+1" alt="Book 1">
-        <button class="download-button" onclick="downloadBook('book1.pdf')">Download</button>
+    <h1>EduSparK Khajana</h1>
+    
+<div class="study-container">
+    <div class="study-box">
+        <img src="https://i.postimg.cc/FKGgDHrK/IMG-20250207-WA0011.jpg" alt="Study Box Image">
+        <button class="study-button">OSWAAL</button>
+    </div>
+
+    <div class="study-box">
+        <img src="https://i.postimg.cc/gjqLgMdP/IMG-20250207-WA0013.jpg" alt="Study Box Image">
+        <button class="study-button">PADHLE</button>
+    </div>
+
+    <div class="study-box">
+        <img src="https://i.postimg.cc/rwrX7zzQ/IMG-20250207-WA0015.jpg" alt="Study Box Image">
+        <button class="study-button">EDUCART</button>
     </div>
     
-    <div class="book-box">
-        <img src="https://via.placeholder.com/150x200.png?text=Book+2" alt="Book 2">
-        <button class="download-button" onclick="downloadBook('book2.pdf')">Download</button>
+    <div class="study-box">
+        <img src="https://i.postimg.cc/j50R5PnW/IMG-20250207-WA0017.jpg" alt="Study Box Image">
+        <button class="study-button">PW</button>
     </div>
-
-    <div class="book-box">
-        <img src="https://via.placeholder.com/150x200.png?text=Book+3" alt="Book 3">
-        <button class="download-button" onclick="downloadBook('book3.pdf')">Download</button>
-    </div>
-
-    <div class="book-box">
-        <img src="https://via.placeholder.com/150x200.png?text=Book+4" alt="Book 4">
-        <button class="download-button" onclick="downloadBook('book4.pdf')">Download</button>
-    </div>
-
-    <!-- Add 26 more books here -->
 </div>
 
-    <script>
-    function getCookie(name) {
-        let cookies = document.cookie.split('; ');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i].split('=');
-            if (cookie[0] === name) return cookie[1];
-        }
-        return null;
-    }
-
-    // Check if user is authenticated
-    if (getCookie("auth") !== "true") {
-        window.location.href = "password.html"; // Redirect to password page if not authenticated
-    }
-    </script>
 
 </body>
 </html>
