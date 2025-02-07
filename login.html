@@ -42,7 +42,6 @@
 
         .input-group {
             margin: 15px 0;
-            position: relative;
         }
 
         .input-group input {
@@ -95,6 +94,22 @@
             text-decoration: underline;
         }
 
+        /* Custom Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 999;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -110,10 +125,10 @@
 <body>
 
 <div class="login-container">
-    <h2>Welcome Back</h2>
+    <h2>Login to Your Account</h2>
     <form id="loginForm">
         <div class="input-group">
-            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email Address" required>
         </div>
         <div class="input-group">
             <input type="password" id="password" placeholder="Password" required>
@@ -121,24 +136,39 @@
         <button type="submit" class="login-button">Login</button>
     </form>
     <div class="signup-link">
-        Don't have an account? <a href="signup.html">Sign up</a>
+        Don't have an account? <a href="signup.html">Sign Up</a>
     </div>
+</div>
+
+<!-- Custom Popup -->
+<div class="popup" id="loginPopup">
+    <p>✅ Login Successful! Redirecting...</p>
 </div>
 
 <script>
     document.getElementById("loginForm").addEventListener("submit", function(event) {
         event.preventDefault();
         
-        // Example authentication (Replace this with real authentication)
-        let username = document.getElementById("username").value;
+        // Simulated login check using local storage
+        let email = document.getElementById("email").value;
         let password = document.getElementById("password").value;
 
-        if (username === "user" && password === "password") {
+        let storedEmail = localStorage.getItem("user_email");
+        let storedPassword = localStorage.getItem("user_password");
+
+        if (email === storedEmail && password === storedPassword) {
+            // Show success popup
+            document.getElementById("loginPopup").style.display = "block";
+
             // Set login cookie for 10 days
-            document.cookie = "loggedIn=true; max-age=" + (10 * 24 * 60 * 60) + "; path=/";
-            window.location.href = "login_success.html"; // Redirect after login
+            document.cookie = "loggedIn=true; max-age=" + 10 * 24 * 60 * 60 + "; path=/";
+
+            // Redirect after 2 seconds
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000);
         } else {
-            alert("Invalid credentials. Try again!");
+            alert("❌ Incorrect Email or Password!");
         }
     });
 </script>
