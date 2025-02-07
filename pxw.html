@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Wallah Batches - EduSparK</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #141e30, #243b55);
+            text-align: center;
+            color: white;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 18px;
+            font-size: 24px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header {
+            margin-left: 20px;
+        }
+
+        /* Back Button */
+        .back-container {
+            cursor: pointer;
+            margin-right: 20px;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-container:hover {
+            transform: scale(1.2);
+        }
+
+        /* Main Content */
+        .content-container {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .study-box {
+            background: #87CEFA;
+            padding: 20px;
+            width: 290px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            animation: bounce 1.5s infinite alternate;
+            margin: 20px auto;
+        }
+
+        .study-box img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .study-button {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .study-button:hover {
+            background: #0056b3;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header-container">
+    <div class="header">EduSparK - Physics Wallah Batches</div>
+
+    <!-- Back Button -->
+    <div class="back-container" onclick="window.location.href='dashboard.html'">
+        🔙
+    </div>
+</div>
+
+<!-- Content Section -->
+<div class="content-container">
+    <h2>Physics Wallah Batches</h2>
+
+    <div class="study-box">
+        <img src="https://i.postimg.cc/MGnNzZR5/pw-batch1.jpg">
+        <button class="study-button" onclick="window.location.href='https://pw.live/batch1'">Join Batch</button>
+    </div>
+
+    <div class="study-box">
+        <img src="https://i.postimg.cc/Nj7HzXGz/pw-batch2.jpg">
+        <button class="study-button" onclick="window.location.href='https://pw.live/batch2'">Join Batch</button>
+    </div>
+</div>
+
+<script>
+    // Redirect to login page if user is not logged in
+    function checkAuth() {
+        let user = document.cookie.includes("loggedIn=true");
+        if (!user) {
+            window.location.href = "login.html";
+        }
+    }
+
+    checkAuth();
+</script>
+
+</body>
+</html>
