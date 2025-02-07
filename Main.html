@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSparK - Books</title>
+    <title>Next Page - EduSparK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -12,9 +12,10 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: white;
             text-align: center;
+            color: white;
             animation: fadeIn 1.5s ease-in-out;
+            box-sizing: border-box;
         }
 
         /* Header */
@@ -25,75 +26,91 @@
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: white;
             padding: 18px;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .header {
+            flex-grow: 1;
+            text-align: left;
             margin-left: 20px;
         }
 
-        /* Back Button */
-        .back-container {
-            margin-right: 20px;
-            cursor: pointer;
+        /* Back Button Styling */
+        .back-button {
             font-size: 24px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: #ff6347;
+        }
+
+        /* Study Boxes Section */
+        .study-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .study-box {
+            background: #87CEFA;
+            padding: 25px;
+            width: 300px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 30px;
+        }
+
+        .study-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .study-box img {
+            width: 100%;
+            border-radius: 12px;
             transition: transform 0.3s ease;
         }
 
-        .back-container:hover {
-            transform: scale(1.2);
-        }
-
-        /* Book Grid */
-        .book-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 100px 20px 20px;
-        }
-
-        .book-box {
-            background: #87CEFA;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .book-box:hover {
+        .study-box:hover img {
             transform: scale(1.05);
         }
 
-        .book-box img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .download-button {
+        .study-button {
             background: #007BFF;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             width: 100%;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 10px;
-            border-radius: 5px;
+            margin-top: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
-        .download-button:hover {
+        .study-button:hover {
             background: #0056b3;
+            transform: translateY(-5px);
         }
 
         /* Animations */
@@ -103,55 +120,88 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
+        /* Mobile and Tablet Responsive Design */
         @media (max-width: 768px) {
-            .book-container {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .back-button {
+                font-size: 20px;
+                top: 10px;
+                right: 10px;
+                position: absolute;
+            }
+
+            .study-container {
+                padding: 0;
+                gap: 20px;
+            }
+
+            .study-box {
+                width: 90%;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .study-button {
+                font-size: 14px;
             }
         }
+
+        /* Mobile Layout for Very Small Screens */
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 10px;
+            }
+
+            .study-box {
+                width: 100%;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .study-button {
+                font-size: 12px;
+            }
+        }
+
     </style>
 </head>
+<body>
 
-
-<!-- Header -->
+<!-- Header with Back Button -->
 <div class="header-container">
-    <div class="header">EduSparK - Books</div>
+    <div class="header">EduSparK</div>
+    <button class="back-button" onclick="window.history.back()">🔙</button>
+</div>
+
+<!-- Study Boxes Section -->
     
-    <!-- Back Button (New Icon & Animation) -->
-    <div class="back-container" onclick="window.location.href='https://eduspark-premium.netlify.app/'">
-        <span class="back-icon">🔙</span> Back
-    </div>
-</div>
-
-<!-- Content Section -->
-<div class="content-container">
-    <h2>ABHAY BATCH CLASS 10TH</h2>
-    <h3>‎ </h3>
-
-    <div class="study-container">
-        <div class="study-box">
-            <img src="https://i.postimg.cc/4xHyP2Tt/Picsart-25-02-06-19-37-48-160.png">
-            <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/abhay10th'">Let's Study</button>
-        </div>
-
-        <div class="study-box">
-            <img src="https://i.postimg.cc/g05MWsNV/78589124373-67499f10f203a-abhay-9th-new-1.png">
-               <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/abhay9th'">Let's Study</button>
-        </div>
-
-        <div class="study-box">
-            <img src="https://i.postimg.cc/vTvJH2YN/hq720.jpg">
-               <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/aarambh10th'">Let's Study</button>
-
-        </div>
+    <h1>NEXT TOPPER 2024-25</h1>
+    
+<div class="study-container">
+    <div class="study-box">
+        <img src="https://i.postimg.cc/X7vPSrgk/667423824369-IMG-9619.png" alt="Study Box Image">
+        <button class="study-button">LET'S STUDY</button>
     </div>
 
-</div>
+    <div class="study-box">
+        <img src="https://i.postimg.cc/g05MWsNV/78589124373-67499f10f203a-abhay-9th-new-1.png" alt="Study Box Image">
+        <button class="study-button">LET'S STUDY</button>
+    </div>
 
+    <div class="study-box">
+        <img src="https://i.postimg.cc/vTvJH2YN/hq720.jpg" alt="Study Box Image">
+        <button class="study-button">LET'S STUDY</button>
+    </div>
+</div>
 
 </body>
 </html>
