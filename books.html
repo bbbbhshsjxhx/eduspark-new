@@ -150,19 +150,28 @@
 </div>
 
 <script>
-    // Function to check login status
     function checkLogin() {
-        let isLoggedIn = document.cookie.includes("user_logged_in=true");
+        let cookies = document.cookie.split("; ");
+        let isLoggedIn = false;
+
+        for (let i = 0; i < cookies.length; i++) {
+            let cookiePair = cookies[i].split("=");
+            if (cookiePair[0] === "loggedIn" && cookiePair[1] === "true") {
+                isLoggedIn = true;
+                break;
+            }
+        }
+
+        // If not logged in, redirect to login.html
         if (!isLoggedIn) {
             window.location.href = "login.html";
         }
     }
 
-    // Function to download books
-    function downloadBook(fileName) {
-        window.location.href = fileName; // Replace with actual book file URLs
-    }
+    // Run this function when the page loads
+    checkLogin();
 </script>
+
 
 </body>
 </html>
