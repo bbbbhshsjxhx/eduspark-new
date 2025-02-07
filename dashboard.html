@@ -182,6 +182,16 @@
         <div class="study-box">
             <img src="https://i.postimg.cc/vTvJH2YN/hq720.jpg">
                <button class="study-button" onclick="window.location.href='https://eduspark-premium.netlify.app/aarambh10th'">Let's Study</button>
+
+            <button onclick="logoutUser()">Logout</button>
+
+<script>
+    function logoutUser() {
+        document.cookie = "loggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = "login.html"; // Redirect to login page after logout
+    }
+</script>
+
         </div>
     </div>
 
