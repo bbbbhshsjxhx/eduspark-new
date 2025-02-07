@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSparK - Books</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Header */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 18px;
+            font-size: 28px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header {
+            margin-left: 20px;
+        }
+
+        /* Back Button */
+        .back-container {
+            margin-right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-container:hover {
+            transform: scale(1.2);
+        }
+
+        /* Book Grid */
+        .book-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 100px 20px 20px;
+        }
+
+        .book-box {
+            background: #87CEFA;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .book-box:hover {
+            transform: scale(1.05);
+        }
+
+        .book-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .download-button {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .download-button:hover {
+            background: #0056b3;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .book-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body onload="checkLogin()">
+
+<!-- Header -->
+<div class="header-container">
+    <div class="header">EduSparK - Books</div>
+    <div class="back-container" onclick="window.location.href='index.html'">⬅</div>
+</div>
+
+<!-- Book Section -->
+<div class="book-container">
+    <!-- Repeat this book-box for 30 books -->
+    <div class="book-box">
+        <img src="https://via.placeholder.com/150x200.png?text=Book+1" alt="Book 1">
+        <button class="download-button" onclick="downloadBook('book1.pdf')">Download</button>
+    </div>
+    
+    <div class="book-box">
+        <img src="https://via.placeholder.com/150x200.png?text=Book+2" alt="Book 2">
+        <button class="download-button" onclick="downloadBook('book2.pdf')">Download</button>
+    </div>
+
+    <div class="book-box">
+        <img src="https://via.placeholder.com/150x200.png?text=Book+3" alt="Book 3">
+        <button class="download-button" onclick="downloadBook('book3.pdf')">Download</button>
+    </div>
+
+    <div class="book-box">
+        <img src="https://via.placeholder.com/150x200.png?text=Book+4" alt="Book 4">
+        <button class="download-button" onclick="downloadBook('book4.pdf')">Download</button>
+    </div>
+
+    <!-- Add 26 more books here -->
+</div>
+
+<script>
+    // Function to check login status
+    function checkLogin() {
+        let isLoggedIn = document.cookie.includes("user_logged_in=true");
+        if (!isLoggedIn) {
+            window.location.href = "login.html";
+        }
+    }
+
+    // Function to download books
+    function downloadBook(fileName) {
+        window.location.href = fileName; // Replace with actual book file URLs
+    }
+</script>
+
+</body>
+</html>
