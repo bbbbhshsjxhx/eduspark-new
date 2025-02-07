@@ -3,108 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSparK - Login</title>
+    <title>Login | EduSparK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c4966);
-            background-size: 400% 400%;
-            animation: gradientMove 8s infinite ease-in-out;
-            text-align: center;
-            color: white;
-            margin: 0;
-            height: 100vh;
+            background: linear-gradient(-45deg, #141e30, #243b55, #141e30);
+            background-size: 300% 300%;
+            animation: bgAnimation 8s infinite ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            height: 100vh;
+            color: white;
         }
 
         .login-container {
-            background: rgba(255, 255, 255, 0.9);
-            color: black;
-            padding: 20px;
-            width: 90%;
-            max-width: 350px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(-30px);
-            animation: fadeInSlide 1s forwards ease-in-out;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 24px;
         }
 
-        input, button {
+        .input-group {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .input-group input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
+            padding: 12px;
             border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
             transition: all 0.3s ease-in-out;
         }
 
-        button {
-            background: #007BFF;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
+        .input-group input:focus {
+            box-shadow: 0px 0px 8px rgba(0, 162, 255, 0.8);
+            transform: scale(1.02);
         }
 
-        button:hover {
-            background: #0056b3;
+        .login-button {
+            background: #00a2ff;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .login-button:hover {
+            background: #0080cc;
             transform: scale(1.05);
         }
 
-        a {
-            color: #007BFF;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
+        .signup-link {
+            margin-top: 10px;
+            font-size: 14px;
         }
 
-        a:hover {
-            color: #0056b3;
+        .signup-link a {
+            color: #00a2ff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .signup-link a:hover {
+            color: #0080cc;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
 <body>
 
 <div class="login-container">
-    <h2>Login to EduSparK</h2>
-    <input type="text" id="username" placeholder="Enter Username">
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="login()">Login</button>
-    <p><a href="signup.html">Don't have an account? Sign up</a></p>
+    <h2>Welcome Back</h2>
+    <form id="loginForm">
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Username" required>
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="login-button">Login</button>
+    </form>
+    <div class="signup-link">
+        Don't have an account? <a href="signup.html">Sign up</a>
+    </div>
 </div>
 
 <script>
-    function setCookie(name, value, days) {
-        let date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
-    }
-
-    function login() {
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // Example authentication (Replace this with real authentication)
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
 
-        if (username && password) {
-            setCookie("user_logged_in", "true", 10);
-            window.location.href = "index.html";
+        if (username === "user" && password === "password") {
+            // Set login cookie for 10 days
+            document.cookie = "loggedIn=true; max-age=" + (10 * 24 * 60 * 60) + "; path=/";
+            window.location.href = "login_success.html"; // Redirect after login
         } else {
-            alert("Please enter both username and password.");
+            alert("Invalid credentials. Try again!");
         }
-    }
+    });
 </script>
 
 </body>
