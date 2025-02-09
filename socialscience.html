@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSparK - Science Quiz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px 20px;
+            font-size: 28px;
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 100px auto 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease-in-out;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        #question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            border: none;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 114, 255, 0.5);
+        }
+
+        .option:hover {
+            background: linear-gradient(135deg, #0056b3, #0096ff);
+            transform: scale(1.05);
+        }
+
+        .correct { background: #4caf50 !important; }
+        .wrong { background: #ff3d3d !important; }
+
+        #explanation {
+            margin-top: 15px;
+            font-size: 1em;
+            color: #ffeb3b;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #next-btn {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            padding: 12px;
+            width: 100%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: none;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(46, 125, 50, 0.5);
+        }
+
+        #next-btn:hover {
+            background: linear-gradient(135deg, #388e3c, #1b5e20);
+            transform: scale(1.1);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            padding: 12px 30px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #b71c1c, #d32f2f);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header-container">
+    EduSparK - S.S.T Quiz
+</div>
+
+<div class="quiz-container">
+    <h1>Test Your S.S.T Knowledge!</h1>
+    <div id="question-box">
+        <h2 id="question">Loading question...</h2>
+        <h3>‎‎ </h3>
+        <div id="options"></div>
+        
+    </div>
+    <p id="explanation"></p>
+    ‎‎ 
+    <h4>Quistion Refresh's Every Hours By Our Server</h4>
+    <button id="next-btn">Next</button>
+    <a href="index.html" class="back-button">Back</a>
+</div>
+
+<script>
+    let currentQuestionIndex = 0;
+    let score = 0;
+let questions = [
+    {
+        question: "Who was the leader of the Quit India Movement?",
+        options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Vallabhbhai Patel", "Subhas Chandra Bose"],
+        answer: "Mahatma Gandhi",
+        explanation: "The Quit India Movement, also known as the August Movement, was launched by Mahatma Gandhi in 1942."
+    },
+    {
+        question: "What is the capital of the Indian state of Gujarat?",
+        options: ["Surat", "Ahmedabad", "Vadodara", "Rajkot"],
+        answer: "Ahmedabad",
+        explanation: "Ahmedabad is the capital city of Gujarat and is also a major industrial and economic hub."
+    },
+    {
+        question: "The Green Revolution in India started in which decade?",
+        options: ["1950s", "1960s", "1970s", "1980s"],
+        answer: "1960s",
+        explanation: "The Green Revolution in India started in the 1960s, focusing on increasing agricultural production through the use of high-yielding varieties of seeds and modern farming techniques."
+    },
+    {
+        question: "Which is the main source of energy in India?",
+        options: ["Solar power", "Hydropower", "Wind energy", "Coal"],
+        answer: "Coal",
+        explanation: "Coal is the main source of energy in India, contributing significantly to electricity production."
+    },
+    {
+        question: "What is the process of global warming?",
+        options: ["Decrease in Earth's temperature", "Increase in Earth's temperature", "Increase in the ozone layer", "Decrease in greenhouse gases"],
+        answer: "Increase in Earth's temperature",
+        explanation: "Global warming refers to the long-term rise in Earth's average surface temperature due to human activities like burning fossil fuels."
+    },
+    {
+        question: "Which Article of the Indian Constitution deals with the Right to Equality?",
+        options: ["Article 14", "Article 15", "Article 16", "Article 17"],
+        answer: "Article 14",
+        explanation: "Article 14 of the Indian Constitution guarantees the Right to Equality, ensuring equal protection under the law."
+    },
+    {
+        question: "Who was the first President of India?",
+        options: ["Jawaharlal Nehru", "Dr. Rajendra Prasad", "Dr. Sarvepalli Radhakrishnan", "Indira Gandhi"],
+        answer: "Dr. Rajendra Prasad",
+        explanation: "Dr. Rajendra Prasad was the first President of India, serving from 1950 to 1962."
+    },
+    {
+        question: "What does the term 'Secularism' in India mean?",
+        options: ["State religion", "Freedom of religion", "Religious tolerance", "Single religion policy"],
+        answer: "Religious tolerance",
+        explanation: "Secularism in India means that the state has no official religion and promotes religious tolerance and equal treatment of all religions."
+    },
+    {
+        question: "What is the purpose of the NREGA scheme?",
+        options: ["Providing scholarships", "Providing employment", "Promoting agriculture", "Building infrastructure"],
+        answer: "Providing employment",
+        explanation: "The National Rural Employment Guarantee Act (NREGA) provides 100 days of guaranteed employment in rural areas to improve livelihoods."
+    },
+    {
+        question: "Who is regarded as the 'Father of the Nation' in India?",
+        options: ["Jawaharlal Nehru", "Bhagat Singh", "Mahatma Gandhi", "Sardar Vallabhbhai Patel"],
+        answer: "Mahatma Gandhi",
+        explanation: "Mahatma Gandhi is regarded as the 'Father of the Nation' in India due to his role in leading the country to independence through non-violent resistance."
+    }
+];
+
+
+
+
+    function loadQuestion() {
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const explanationElement = document.getElementById("explanation");
+        const nextButton = document.getElementById("next-btn");
+
+        explanationElement.style.display = "none";
+        nextButton.style.display = "none";
+
+        const currentQuestion = questions[currentQuestionIndex];
+        questionElement.innerHTML = currentQuestion.question;
+        optionsElement.innerHTML = "";
+
+        currentQuestion.options.forEach(option => {
+            const button = document.createElement("button");
+            button.classList.add("option");
+            button.textContent = option;
+            button.onclick = () => checkAnswer(button, option, currentQuestion.answer, currentQuestion.explanation);
+            optionsElement.appendChild(button);
+        });
+    }
+
+    function checkAnswer(selectedButton, selectedOption, correctAnswer, explanation) {
+        const explanationElement = document.getElementById("explanation");
+        const nextButton = document.getElementById("next-btn");
+
+        document.querySelectorAll(".option").forEach(button => button.disabled = true);
+
+        if (selectedOption === correctAnswer) {
+            selectedButton.classList.add("correct");
+            explanationElement.style.color = "#4caf50";
+            explanationElement.textContent = "Correct! " + explanation;
+        } else {
+            selectedButton.classList.add("wrong");
+            explanationElement.style.color = "#ffeb3b";
+            explanationElement.innerHTML = `Wrong! The correct answer is: <strong>${correctAnswer}</strong><br>${explanation}`;
+        }
+
+        explanationElement.style.display = "block";
+        nextButton.style.display = "block";
+
+        nextButton.onclick = () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                document.getElementById("question").textContent = "Quiz Completed!";
+                document.getElementById("options").innerHTML = "";
+                nextButton.style.display = "none";
+            }
+        };
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>

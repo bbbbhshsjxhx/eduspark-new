@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSparK - Science Quiz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px 20px;
+            font-size: 28px;
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 100px auto 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease-in-out;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        #question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
+            border: none;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 114, 255, 0.5);
+        }
+
+        .option:hover {
+            background: linear-gradient(135deg, #0056b3, #0096ff);
+            transform: scale(1.05);
+        }
+
+        .correct { background: #4caf50 !important; }
+        .wrong { background: #ff3d3d !important; }
+
+        #explanation {
+            margin-top: 15px;
+            font-size: 1em;
+            color: #ffeb3b;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #next-btn {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            padding: 12px;
+            width: 100%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: none;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(46, 125, 50, 0.5);
+        }
+
+        #next-btn:hover {
+            background: linear-gradient(135deg, #388e3c, #1b5e20);
+            transform: scale(1.1);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            padding: 12px 30px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #b71c1c, #d32f2f);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header-container">
+    EduSparK - Science Quiz
+</div>
+
+<div class="quiz-container">
+    <h1>Test Your Science Knowledge!</h1>
+    <div id="question-box">
+        <h2 id="question">Loading question...</h2>
+        <h3>‎‎ </h3>
+        <div id="options"></div>
+        
+    </div>
+    <p id="explanation"></p>
+    ‎‎ 
+    <h4>Quistion Refresh's Every Hours By Our Server</h4>
+    <button id="next-btn">Next</button>
+    <a href="index.html" class="back-button">Back</a>
+</div>
+
+<script>
+    let currentQuestionIndex = 0;
+    let score = 0;
+let questions = [
+    {
+        question: "Which of the following is a non-renewable resource?",
+        options: ["Solar Energy", "Coal", "Wind Energy", "Geothermal Energy"],
+        answer: "Coal",
+        explanation: "Coal is a non-renewable resource as it cannot be replenished within a short period."
+    },
+    {
+        question: "The process of converting solid waste into compost is called?",
+        options: ["Composting", "Vermiculture", "Recycling", "Incineration"],
+        answer: "Composting",
+        explanation: "Composting is the process of decomposing organic waste into nutrient-rich soil."
+    },
+    {
+        question: "Which of the following is the correct formula for calculating work done?",
+        options: ["W = F × D", "W = F × A", "W = F × V", "W = V × D"],
+        answer: "W = F × D",
+        explanation: "Work done is calculated by multiplying the force applied with the distance moved in the direction of the force."
+    },
+    {
+        question: "What is the SI unit of electric potential?",
+        options: ["Volt", "Ampere", "Ohm", "Coulomb"],
+        answer: "Volt",
+        explanation: "Electric potential is measured in volts (V)."
+    },
+    {
+        question: "Which of the following is NOT a part of the human circulatory system?",
+        options: ["Heart", "Lungs", "Kidneys", "Blood Vessels"],
+        answer: "Kidneys",
+        explanation: "The kidneys are part of the excretory system, not the circulatory system."
+    },
+    {
+        question: "Which acid is present in the human stomach?",
+        options: ["Sulfuric Acid", "Hydrochloric Acid", "Nitric Acid", "Acetic Acid"],
+        answer: "Hydrochloric Acid",
+        explanation: "Hydrochloric acid helps in digestion in the stomach by breaking down food."
+    },
+    {
+        question: "Which of the following is the primary cause of global warming?",
+        options: ["CFCs", "CO2", "Methane", "Oxygen"],
+        answer: "CO2",
+        explanation: "Carbon dioxide (CO2) is the major greenhouse gas contributing to global warming."
+    },
+    {
+        question: "What is the formula for photosynthesis?",
+        options: ["6CO2 + 6H2O → C6H12O6 + 6O2", "C6H12O6 + 6O2 → 6CO2 + 6H2O", "CO2 + O2 → C6H12O6", "C6H12O6 → CO2 + H2O"],
+        answer: "6CO2 + 6H2O → C6H12O6 + 6O2",
+        explanation: "This is the chemical equation for photosynthesis, where plants convert carbon dioxide and water into glucose and oxygen."
+    },
+    {
+        question: "What is the pH level of hydrochloric acid?",
+        options: ["1", "7", "12", "14"],
+        answer: "1",
+        explanation: "Hydrochloric acid is highly acidic, with a pH value close to 1."
+    },
+    {
+        question: "What is the process of heat transfer in solids?",
+        options: ["Convection", "Conduction", "Radiation", "Refraction"],
+        answer: "Conduction",
+        explanation: "In solids, heat is transferred through the process of conduction, where particles vibrate and pass energy to neighboring particles."
+    },
+        {
+            question: "What is the chemical formula for water?",
+            options: ["H2O", "CO2", "O2", "H2SO4"],
+            answer: "H2O",
+            explanation: "Water is composed of two hydrogen atoms and one oxygen atom, hence H2O."
+        },
+        {
+            question: "What is the SI unit of force?",
+            options: ["Newton", "Joule", "Watt", "Meter"],
+            answer: "Newton",
+            explanation: "Force is measured in Newtons (N) in the International System of Units."
+        },
+        {
+            question: "Which of the following is an example of a renewable source of energy?",
+            options: ["Coal", "Solar", "Natural Gas", "Petroleum"],
+            answer: "Solar",
+            explanation: "Solar energy is renewable because it is derived from the sun, which is inexhaustible."
+        },
+        {
+            question: "What is the pH value of neutral water?",
+            options: ["7", "0", "14", "10"],
+            answer: "7",
+            explanation: "Pure water has a neutral pH value of 7."
+        },
+        {
+            question: "Which gas is most abundant in the Earth's atmosphere?",
+            options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"],
+            answer: "Nitrogen",
+            explanation: "Nitrogen makes up about 78% of the Earth's atmosphere."
+        },
+        {
+            question: "Which element is essential for the process of photosynthesis?",
+            options: ["Oxygen", "Carbon", "Chlorophyll", "Hydrogen"],
+            answer: "Chlorophyll",
+            explanation: "Chlorophyll absorbs light energy needed for photosynthesis."
+        },
+        {
+            question: "What is the formula for calculating speed?",
+            options: ["Distance × Time", "Distance / Time", "Time / Distance", "Distance × Velocity"],
+            answer: "Distance / Time",
+            explanation: "Speed is calculated as distance divided by time."
+        },
+        {
+            question: "What is the boiling point of water in Celsius?",
+            options: ["100°C", "0°C", "212°F", "37°C"],
+            answer: "100°C",
+            explanation: "The boiling point of water is 100°C at standard atmospheric pressure."
+        },
+        {
+            question: "What is the SI unit of electric current?",
+            options: ["Ampere", "Volt", "Watt", "Coulomb"],
+            answer: "Ampere",
+            explanation: "Electric current is measured in amperes (A)."
+        },
+    ];
+
+    function loadQuestion() {
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const explanationElement = document.getElementById("explanation");
+        const nextButton = document.getElementById("next-btn");
+
+        explanationElement.style.display = "none";
+        nextButton.style.display = "none";
+
+        const currentQuestion = questions[currentQuestionIndex];
+        questionElement.innerHTML = currentQuestion.question;
+        optionsElement.innerHTML = "";
+
+        currentQuestion.options.forEach(option => {
+            const button = document.createElement("button");
+            button.classList.add("option");
+            button.textContent = option;
+            button.onclick = () => checkAnswer(button, option, currentQuestion.answer, currentQuestion.explanation);
+            optionsElement.appendChild(button);
+        });
+    }
+
+    function checkAnswer(selectedButton, selectedOption, correctAnswer, explanation) {
+        const explanationElement = document.getElementById("explanation");
+        const nextButton = document.getElementById("next-btn");
+
+        document.querySelectorAll(".option").forEach(button => button.disabled = true);
+
+        if (selectedOption === correctAnswer) {
+            selectedButton.classList.add("correct");
+            explanationElement.style.color = "#4caf50";
+            explanationElement.textContent = "Correct! " + explanation;
+        } else {
+            selectedButton.classList.add("wrong");
+            explanationElement.style.color = "#ffeb3b";
+            explanationElement.innerHTML = `Wrong! The correct answer is: <strong>${correctAnswer}</strong><br>${explanation}`;
+        }
+
+        explanationElement.style.display = "block";
+        nextButton.style.display = "block";
+
+        nextButton.onclick = () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                document.getElementById("question").textContent = "Quiz Completed!";
+                document.getElementById("options").innerHTML = "";
+                nextButton.style.display = "none";
+            }
+        };
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
