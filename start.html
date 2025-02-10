@@ -304,7 +304,7 @@
     function getCookie(name) {
         let decodedCookie = decodeURIComponent(document.cookie);
         let cookies = decodedCookie.split(';');
-        for(let i = 0; i < cookies.length; i++) {
+        for (let i = 0; i < cookies.length; i++) {
             let c = cookies[i].trim();
             if (c.indexOf(name + "=") == 0) {
                 return c.substring(name.length + 1);
@@ -320,13 +320,25 @@
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    window.onload = function() {
-        if (getCookie('telegram-modal') === '') {
+    window.onload = function () {
+        // Check if the user has joined the Telegram channel (cookie not set)
+        if (getCookie('joinedTelegram') === '') {
             document.getElementById('telegramModal').classList.add('show');
-            setCookie('telegram-modal', 'shown', 1);
+        } else {
+            // Hide the modal if the cookie is already set (already joined)
+            document.getElementById('telegramModal').classList.remove('show');
         }
     }
+
+    document.querySelector('.telegram-btn').addEventListener('click', function () {
+        // Set a cookie that the user has joined the Telegram channel
+        setCookie("joinedTelegram", "true", 365);
+        
+        // Close the modal after the button is clicked
+        document.getElementById('telegramModal').classList.remove('show');
+    });
 </script>
+
 
 </body>
 </html>
