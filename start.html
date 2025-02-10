@@ -25,7 +25,7 @@
         .header-container {
             padding: 15px;
             text-align: center;
-            font-size: 40px;
+            font-size: 90px;
             background-color: #1a1a1a;
             color: cyan;
             text-shadow: 0 0 15px cyan;
@@ -39,9 +39,9 @@
         }
 
         .home-container img {
-            max-width: 200px;
-            margin-bottom: 20px;
+            max-width: 150px;
             border-radius: 50%;
+            margin-bottom: 20px;
         }
 
         .home-container h1 {
@@ -64,7 +64,7 @@
             padding: 12px 30px;
             background-color: #0088cc;
             color: white;
-            font-size: 18px;
+            font-size: 50px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -79,9 +79,9 @@
 
         .team-members {
             display: flex;
-            justify-content: space-around;
-            margin: 50px 20px;
+            justify-content: center;
             flex-wrap: wrap;
+            margin: 50px 20px;
         }
 
         .team-member {
@@ -91,6 +91,7 @@
             width: 250px;
             text-align: center;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            margin: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -186,6 +187,66 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
+        /* Responsive Design */
+        @media only screen and (max-width: 768px) {
+            .header-container {
+                font-size: 50px;
+            }
+
+            .home-container h1 {
+                font-size: 36px;
+            }
+
+            .home-container h2 {
+                font-size: 20px;
+            }
+
+            .team-member {
+                width: 100%;
+                max-width: 320px;
+                margin: 15px 0;
+            }
+
+            .team-member img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .get-started-btn {
+                font-size: 30px;
+                padding: 10px 25px;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .home-container {
+                padding: 80px 10px;
+            }
+
+            .home-container h1 {
+                font-size: 30px;
+            }
+
+            .home-container h2 {
+                font-size: 18px;
+            }
+
+            .get-started-btn {
+                font-size: 25px;
+                padding: 8px 20px;
+            }
+
+            .team-member {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .team-member img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -209,27 +270,23 @@
     <div class="team-member">
         <img src="https://i.postimg.cc/vZ956tLc/Picsart-24-12-31-14-29-53-463.png" alt="Team Member 1">
         <h3>Learn Hub</h3>
-        <p></p>
+        <p>Innovator of Knowledge</p>
     </div>
-    <h3>‎ </h3>
     <div class="team-member">
         <img src="https://i.postimg.cc/PxNb3p8D/Picsart-24-12-31-14-33-20-426.png" alt="Team Member 2">
         <h3>Nitesh</h3>
         <p></p>
     </div>
-    <h3>‎ </h3>
     <div class="team-member">
         <img src="https://i.postimg.cc/DwJTTBkp/Picsart-24-12-31-14-47-55-376.png" alt="Team Member 3">
         <h3>Madara</h3>
         <p></p>
     </div>
-    <h3>‎ </h3>
     <div class="team-member">
         <img src="https://i.postimg.cc/SRvv1bsS/IMG-20250108-204700-656.jpg" alt="Team Member 4">
-        <h3>Paradox</h3>
+        <h3>Paradax</h3>
         <p></p>
     </div>
-    <h3>‎ </h3>
 </div>
 
 <!-- Telegram Modal -->
@@ -258,21 +315,17 @@
 
     function setCookie(name, value, days) {
         let date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         let expires = "expires=" + date.toUTCString();
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
     window.onload = function() {
-        if (!getCookie("joinedTelegram")) {
+        if (getCookie('telegram-modal') === '') {
             document.getElementById('telegramModal').classList.add('show');
+            setCookie('telegram-modal', 'shown', 1);
         }
     }
-
-    document.querySelector('.telegram-btn').addEventListener('click', function() {
-        setCookie("joinedTelegram", "true", 365);
-        document.getElementById('telegramModal').classList.remove('show');
-    });
 </script>
 
 </body>
